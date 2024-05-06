@@ -1,0 +1,26 @@
+int data = 2; 
+int clock = 3;
+int latch = 4;
+
+void setup()
+{
+  pinMode(data, OUTPUT);
+  pinMode(clock, OUTPUT);  
+  pinMode(latch, OUTPUT);  
+}
+
+void loop()                     // run over and over again
+{
+  int delayTime = 100; //the number of milliseconds to delay between LED updates
+  for(int i = 0; i < 256; i++){
+   updateLEDs(i);
+   delay(delayTime); 
+  }
+}
+
+void updateLEDs(int value){
+  digitalWrite(latch, LOW);     
+  shiftOut(data, clock, MSBFIRST, value); 
+  digitalWrite(latch, HIGH);  
+
+}
